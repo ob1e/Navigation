@@ -2,7 +2,13 @@
 //  Post.swift
 //  Navigation
 //
-//  Created by JaY on 11.09.2022.
+//  Created by Саинчук Николай on 11.09.2022.
 //
 
-import Foundation
+import UIKit
+
+// MARK: - Properties
+
+struct Post {
+    var title: String
+}

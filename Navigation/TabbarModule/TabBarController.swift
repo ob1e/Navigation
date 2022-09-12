@@ -2,7 +2,10 @@
 //  TabBarController.swift
 //  Navigation
 //
-//  Created by JaY on 06.09.2022.
+//  Created by Саинчук Николай on 06.09.2022.
 //
 
-import Foundation
+import UIKit
+
+class TabBarController: UITabBarController {}
+

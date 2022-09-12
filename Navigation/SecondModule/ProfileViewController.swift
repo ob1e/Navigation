@@ -2,7 +2,32 @@
 //  ProfileViewController.swift
 //  Navigation
 //
-//  Created by JaY on 05.09.2022.
+//  Created by Саинчук Николай on 05.09.2022.
 //
 
-import Foundation
+import UIKit
+
+class ProfileViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    // MARK: - Life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+
+    // MARK: - Methods
+    func setupUI() {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
