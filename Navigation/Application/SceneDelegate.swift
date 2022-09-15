@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Navigation
 //
-//  Created by JaY on 03.09.2022.
+//  Created by Саинчук Николай on 03.09.2022.
 //
 
 import UIKit
@@ -11,14 +11,57 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+// MARK: 1
+    
+    var firstTabNavigationController : UINavigationController!
+    var secondTabNavigationController: UINavigationController!
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        let window = UIWindow(windowScene: windowScene)
+//        window.rootViewController = ViewController()
+//        window.makeKeyAndVisible()
+//        self.window = window
+        
+        
+        //    MARK: 2
+            let tabBarController = TabBarController()
+            
+        //    MARK: 3
+            firstTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
+            secondTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
+            
+        //    MARK: 4
+            
+            tabBarController.viewControllers = [firstTabNavigationController, secondTabNavigationController]
+            
+        //    MARK: 5
+            
+            let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 0)
+            let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+            
+        //    MARK: 6
+            firstTabNavigationController.tabBarItem = item1
+            secondTabNavigationController.tabBarItem = item2
+            
+        //    MARK: 7
+        UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 1/255.0, alpha: 1.0)
+            UITabBar.appearance().backgroundColor = .orange
+            
+        //    MARK: 8
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+            self.window = window
     }
+    
 
+    
+    
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
