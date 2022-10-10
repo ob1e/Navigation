@@ -13,6 +13,16 @@ class ProfileViewController: UIViewController {
     
     var profileHeaderView: ProfileHeaderView = ProfileHeaderView()
     
+    
+    let changeTitle: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor.systemBlue
+        button.setTitle("Title", for: .normal)
+        button.titleLabel?.textColor = .white
+        return button
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -23,12 +33,31 @@ class ProfileViewController: UIViewController {
     // MARK: - Methods
     func setupUI() {
         view.backgroundColor = .lightGray
-        view.addSubview(profileHeaderView)
+        self.navigationItem.title = "Profile"
         viewWillLayoutSubviews()
+        setupConstraint()
     }
     
     override func viewWillLayoutSubviews() {
-        profileHeaderView.frame = view.frame
+
+    }
+
+    func setupConstraint() {
+        view.addSubview(profileHeaderView)
+        view.addSubview(changeTitle)
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+            
+            changeTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            changeTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            changeTitle.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            changeTitle.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }
 
