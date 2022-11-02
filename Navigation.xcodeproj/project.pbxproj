@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6973B8C128F735E700DDBB39 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973B8C028F735E700DDBB39 /* LogInViewController.swift */; };
+		697ECF9B290E74DA00B5C7E8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECF9A290E74DA00B5C7E8 /* CustomButton.swift */; };
 		697F0A7428C6748900B4F9AB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697F0A7328C6748900B4F9AB /* FeedViewController.swift */; };
 		697F0A7628C674AE00B4F9AB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697F0A7528C674AE00B4F9AB /* ProfileViewController.swift */; };
 		697F0A7828C6752B00B4F9AB /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697F0A7728C6752B00B4F9AB /* PostViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6973B8C028F735E700DDBB39 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		697ECF9A290E74DA00B5C7E8 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		697F0A7328C6748900B4F9AB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		697F0A7528C674AE00B4F9AB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		697F0A7728C6752B00B4F9AB /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 			children = (
 				69A1D04828D3AC2E0091301A /* ProfileHeaderView.swift */,
 				697F0A7528C674AE00B4F9AB /* ProfileViewController.swift */,
+				6973B8C028F735E700DDBB39 /* LogInViewController.swift */,
+				697ECF9A290E74DA00B5C7E8 /* CustomButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -189,11 +195,13 @@
 			files = (
 				697F0A7828C6752B00B4F9AB /* PostViewController.swift in Sources */,
 				69B9872828C7C8F60013D319 /* TabBarController.swift in Sources */,
+				6973B8C128F735E700DDBB39 /* LogInViewController.swift in Sources */,
 				69C2D32F28C3B426008C198D /* ViewController.swift in Sources */,
 				69C2D32B28C3B426008C198D /* AppDelegate.swift in Sources */,
 				697F0A7A28C6754C00B4F9AB /* InfoViewController.swift in Sources */,
 				697F0A7628C674AE00B4F9AB /* ProfileViewController.swift in Sources */,
 				69811F0928CE2046001867B8 /* Post.swift in Sources */,
+				697ECF9B290E74DA00B5C7E8 /* CustomButton.swift in Sources */,
 				69A1D04928D3AC2E0091301A /* ProfileHeaderView.swift in Sources */,
 				697F0A7428C6748900B4F9AB /* FeedViewController.swift in Sources */,
 				69C2D32D28C3B426008C198D /* SceneDelegate.swift in Sources */,

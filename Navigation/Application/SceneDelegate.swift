@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         //    MARK: 3
             firstTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-            secondTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
+            secondTabNavigationController = UINavigationController.init(rootViewController: LogInViewController())
             
         //    MARK: 4
             
@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         //    MARK: 5
             
-            let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 0)
+            let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "house.fill"), tag: 0)
             let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
             
         //    MARK: 6
@@ -49,8 +49,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             secondTabNavigationController.tabBarItem = item2
             
         //    MARK: 7
-        UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 1/255.0, alpha: 1.0)
-            UITabBar.appearance().backgroundColor = .orange
+        UITabBar.appearance().tintColor = UIColor(red: 95/255.0, green: 132/255.0, blue: 200/255.0, alpha: 1.0)
+        UITabBar.appearance().backgroundColor = .systemGray6
             
         //    MARK: 8
             let window = UIWindow(windowScene: windowScene)
