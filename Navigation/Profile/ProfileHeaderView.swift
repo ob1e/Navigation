@@ -72,6 +72,7 @@ class ProfileHeaderView: UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
+    
 
     private var statusText: String = ""
     
