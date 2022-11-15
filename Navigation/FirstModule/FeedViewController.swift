@@ -10,7 +10,7 @@ import UIKit
 class FeedViewController: UIViewController {
 
     // MARK: - Properties
-    var dataSource = Post(title: "Post Title")
+    var dataSource = Post(title: "Title post")
 
     let stackView: UIStackView = {
         let stackView = UIStackView()
