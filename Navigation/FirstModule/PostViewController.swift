@@ -33,7 +33,7 @@ class PostViewController: UIViewController {
     func setupUI() {
         view.backgroundColor = .darkGray
         setupBarButtonItem()
-        titleLabel.text = dataSource.dataSource.title
+        titleLabel.text = dataSource.dataSource.title 
         setupConstraints()
     }
     

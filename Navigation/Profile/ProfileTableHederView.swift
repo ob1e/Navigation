@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHederView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
 
@@ -88,8 +88,8 @@ class ProfileHeaderView: UIView {
         statusText = String(textField.text!)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         setupConstraint()
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.addGestureRecognizer(tap)
