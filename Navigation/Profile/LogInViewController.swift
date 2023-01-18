@@ -9,14 +9,14 @@ class LogInViewController: UIViewController {
     
     // MARK: - Properties
     
-// Scroll
-   private lazy var scrollView: UIScrollView = {
+    // Scroll
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .white
         return scrollView
     }()
-//  Stack
+    //  Stack
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +24,7 @@ class LogInViewController: UIViewController {
         stack.distribution = .fillEqually
         return stack
     }()
-// Logo
+    // Logo
     var logoImage: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class LogInViewController: UIViewController {
         logo.layer.shouldRasterize = true
         return logo
     }()
-//    Username
+    //    Username
     private lazy var loginTextField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +54,7 @@ class LogInViewController: UIViewController {
         login.tintColor = UIColor(named: "AccentColor")
         return login
     }()
-//    Password
+    //    Password
     private lazy var passwordTextField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ class LogInViewController: UIViewController {
         password.tintColor = UIColor(named: "AccentColor")
         return password
     }()
-// Button
+    // Button
     private lazy var button: CustomButton = {
         let button = CustomButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,6 @@ class LogInViewController: UIViewController {
     
     // MARK: - Methods
     func setupUI(){
-        navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white
         setupConstraint()
         setupGestures()
@@ -112,9 +111,7 @@ class LogInViewController: UIViewController {
         stackView.addArrangedSubview(loginTextField)
         stackView.addArrangedSubview(passwordTextField)
         
-        
         NSLayoutConstraint .activate([
-           
             
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -131,19 +128,19 @@ class LogInViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
             button.heightAnchor.constraint(equalToConstant: 50),
             button.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             button.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16)
         ])
     }
-// Скрытие клавиатуры
+    // Скрытие клавиатуры
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.forcedHidingKeyboard))
         self.view.addGestureRecognizer(tapGesture)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self,
@@ -154,51 +151,52 @@ class LogInViewController: UIViewController {
                                                selector: #selector(self.didHideKeyboard(_:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        navigationController?.navigationBar.isHidden = true
     }
-
-
+    
+    
     @objc private func didShowKeyboard(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-
+            
             let loginButtonBottomPointY = self.button.frame.origin.y + self.button.frame.height
-
+            
             let keyboardOriginY = self.view.frame.height - keyboardHeight
-
+            
             let yOffset = keyboardOriginY < loginButtonBottomPointY
             ? loginButtonBottomPointY - keyboardOriginY + 16
             : 0
             self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
         }
     }
-
+    
     @objc private func didHideKeyboard(_ notification: Notification) {
         self.forcedHidingKeyboard()
     }
-
+    
     @objc private func forcedHidingKeyboard() {
         self.view.endEditing(true)
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-
+    
     @objc private func logInProfile() {
         let profileViewController = ProfileViewController ()
         navigationController?.pushViewController(profileViewController, animated: true)
     }
-
+    
 }
 
 
 extension LogInViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+        
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.forcedHidingKeyboard()
         return true

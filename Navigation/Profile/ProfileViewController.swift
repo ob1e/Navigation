@@ -1,7 +1,7 @@
 //
 //  ProfileViewController.swift
 //  Navigation
-
+// Главный экран профиль стена
 
 import UIKit
 
@@ -15,22 +15,28 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .white
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 400
+        tableView.estimatedRowHeight = 100
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "CustomCellID")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
         tableView.register(ProfileTableHederView.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderFooterViewID")
+        tableView.sectionHeaderTopPadding = 0
         return tableView
     }()
 
     private var viewModel: [PostStruct] = [post1, post2, post3, post4]
-    
+
     
     // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Methods
@@ -55,21 +61,51 @@ class ProfileViewController: UIViewController {
 // MARK: Extension
 
 extension ProfileViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.count
+    //    Расчет размера ячейки в разных секциях
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var  x: CGFloat = 0
+        if indexPath.section == 0 {
+            x = (UIScreen.main.bounds.width - 60) / 4 + 24 + 30
+        } else {
+            x = UITableView.automaticDimension
+        }
+        return x
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "CustomCellID", for: indexPath) as? PostTableViewCell else { let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-                        return cell
+    // количество строк в секции
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return self.viewModel.count
         }
-        let post = self.viewModel[indexPath.row]
-        let viewModel = PostTableViewCell.ViewModel(author: post.author, description: post.description, image: post.image, likes: post.likes, views: post.views, indexPath: indexPath)
-        cell.setup(with: viewModel)
-      
-        return cell
-        }
+        return 1
     }
+    // добавлене ячеек
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as? PhotosTableViewCell
+            else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                return cell
+            }
+            return cell
+        }
+        
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "CustomCellID", for: indexPath) as? PostTableViewCell
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
+        if indexPath.section == 1 {
+            let post = self.viewModel[indexPath.row]
+            let viewModel = PostTableViewCell.ViewModel(author: post.author, description: post.description, image: post.image, likes: post.likes, views: post.views, indexPath: indexPath)
+            cell.setup(with: viewModel)
+            return cell
+        }
+        return cell
+    }
+    
+}
 
 extension ProfileViewController: UITableViewDelegate {
     
@@ -84,7 +120,20 @@ extension ProfileViewController: UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        240
+
+//    Выделение ячейки
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let photoGallery = PhotosViewController()
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            navigationController?.pushViewController(photoGallery, animated: true)
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+        
     }
 }

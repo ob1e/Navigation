@@ -1,16 +1,14 @@
 //
 //  ProfileHeaderView.swift
 //  Navigation
-//
-//  Created by Саинчук Николай on 15.09.2022.
-//
+
 
 import UIKit
 
 class ProfileTableHederView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
-
+    
     let fullNameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +27,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         image.layer.cornerRadius = 50
         image.clipsToBounds = true
         image.layer.shouldRasterize = true
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -41,7 +40,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         return view
     }()
     
-   lazy var statusTextField: UITextField = {
+    lazy var statusTextField: UITextField = {
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.borderStyle = .roundedRect
@@ -73,11 +72,11 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         return button
     }()
     
-
+    
     private var statusText: String = ""
     
     // MARK: - Methods
-
+    
     @objc func buttonPressed() {
         statusLabel.text = statusText
         print("\(statusLabel.text!)")
@@ -108,31 +107,32 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         self.addSubview(statusLabel)
         self.addSubview(setStatusButton)
         self.addSubview(statusTextField)
-//        
+        //
         NSLayoutConstraint.activate([
             
             fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
             fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-
+            
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-
+            
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -71),
             statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-
+            
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
             statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-
+            
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 50),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
 }

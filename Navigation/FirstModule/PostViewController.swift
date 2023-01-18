@@ -38,8 +38,8 @@ class PostViewController: UIViewController {
     }
     
     func setupBarButtonItem() {
-        let baritem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(addTarget))
-        self.navigationItem.rightBarButtonItem = baritem
+        let barItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(addTarget))
+        self.navigationItem.rightBarButtonItem = barItem
     }
     
     func setupConstraints() {
