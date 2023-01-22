@@ -42,7 +42,7 @@ class PostTableViewCell: UITableViewCell {
         image.backgroundColor = .black
         return image
     }()
-        
+    
     private lazy var likesPost: UILabel = {
         let likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class PostTableViewCell: UITableViewCell {
         likes.textColor = .black
         return likes
     }()
-
+    
     private lazy var viewsPost: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +102,7 @@ class PostTableViewCell: UITableViewCell {
             self.contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.authorPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-
+            
             self.imagePost.topAnchor.constraint(equalTo: self.authorPost.bottomAnchor),
             self.imagePost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.imagePost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
@@ -117,7 +117,7 @@ class PostTableViewCell: UITableViewCell {
             self.likesPost.topAnchor.constraint(equalTo: self.descriptionPost.bottomAnchor, constant: 16),
             self.likesPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.likesPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
-
+            
             self.viewsPost.topAnchor.constraint(equalTo: self.descriptionPost.bottomAnchor, constant: 16),
             self.viewsPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             self.viewsPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
