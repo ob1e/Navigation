@@ -8,7 +8,7 @@ import UIKit
 class ProfileTableHederView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
-    
+
     let fullNameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +21,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     let avatarImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.isUserInteractionEnabled = true
         image.image = UIImage(named: "photo")
         image.layer.borderWidth = 3
         image.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
@@ -72,8 +73,41 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         return button
     }()
     
+    lazy var buttonClose: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.alpha = 0.0
+        button.clipsToBounds = true
+        button.setImage(UIImage(systemName: "multiply.square.fill"), for: .normal)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 25), forImageIn: .normal)
+        button.tintColor = UIColor(named: "redPepper")
+        button.addTarget(self, action: #selector(closePressed), for: .touchUpInside)
+        return button
+    }()
     
+    lazy var transparentBackground: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.isHidden = true
+        return view
+    }()
+    
+    var beginPointAvatar = CGPoint()  // начальная точка аватарки
     private var statusText: String = ""
+    
+    // MARK: Life cycle
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        setupConstraint()
+        setupAnimation()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.addGestureRecognizer(tap)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Methods
     
@@ -87,27 +121,62 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         statusText = String(textField.text!)
     }
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        setupConstraint()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.addGestureRecognizer(tap)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     @objc func dismissKeyboard() {
         self.endEditing(true)
     }
     
+    private func setupAnimation() {
+        let tapAvatar = UITapGestureRecognizer(
+            target: self, action: #selector(didTapAvatar)
+        )
+        self.avatarImageView.addGestureRecognizer(tapAvatar)
+    }
+    
+    @objc private func didTapAvatar() {
+        basicAnimation()
+    }
+    
+    private func basicAnimation() {
+        beginPointAvatar = self.avatarImageView.center
+        UIView.animate(withDuration: 0.5){
+            let scale = UIScreen.main.bounds.width / self.avatarImageView.bounds.width
+            self.avatarImageView.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY - self.beginPointAvatar.y)
+            self.avatarImageView.layer.cornerRadius = .zero
+            self.avatarImageView.layer.borderWidth = .zero
+            self.avatarImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.transparentBackground.isHidden = false
+            self.transparentBackground.layer.opacity = 0.5
+            self.avatarImageView.isUserInteractionEnabled = false
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.buttonClose.alpha = 1.0
+            }
+        }
+    }
+
+    @objc func closePressed() {
+        UIView.animate(withDuration: 0.5) {
+            self.avatarImageView.transform = .identity
+            self.avatarImageView.center = self.beginPointAvatar
+            self.avatarImageView.layer.cornerRadius = 50
+            self.avatarImageView.layer.borderWidth = 3
+            self.avatarImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
+            self.avatarImageView.isUserInteractionEnabled = true
+            self.buttonClose.alpha = 0.0
+            self.transparentBackground.isHidden = true
+            self.transparentBackground.layer.opacity = 0.0
+        }
+    }
+    
     func setupConstraint() {
-        self.addSubview(fullNameLabel)
-        self.addSubview(avatarImageView)
-        self.addSubview(statusLabel)
         self.addSubview(setStatusButton)
         self.addSubview(statusTextField)
-        //
+        self.addSubview(transparentBackground)
+        self.addSubview(fullNameLabel)
+        self.addSubview(statusLabel)
+        self.addSubview(avatarImageView)
+        self.addSubview(buttonClose)
+
         NSLayoutConstraint.activate([
             
             fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
@@ -132,7 +201,13 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+            
+            buttonClose.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
+            buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            
+            transparentBackground.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            transparentBackground.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
         ])
     }
 }
