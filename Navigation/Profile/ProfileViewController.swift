@@ -4,6 +4,7 @@
 // Главный экран профиль стена
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -41,7 +42,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-    
+#if DEBUG
+        self.tableView.backgroundColor = .systemGray
+#else
+        self.tableView.backgroundColor = .white
+#endif
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,6 +57,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Methods
     
     func setupUI() {
+
+        
+        
         setupConstraint()
     }
     

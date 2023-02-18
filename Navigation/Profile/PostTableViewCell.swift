@@ -7,7 +7,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    struct ViewModel {
+   public struct ViewModel {
         var author: String
         var description: String
         var image: UIImage?
