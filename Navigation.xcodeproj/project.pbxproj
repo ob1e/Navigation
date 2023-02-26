@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F7E7DB95786BD86F77FA971 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B9C1D635052D5205A616BB /* Pods_Navigation.framework */; };
 		6973B8C128F735E700DDBB39 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973B8C028F735E700DDBB39 /* LogInViewController.swift */; };
+		6974EFE229A91224003B10BB /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 6974EFE129A91224003B10BB /* iOSIntPackage */; };
 		69762A67291AC5030054AA7D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69762A66291AC5030054AA7D /* PostTableViewCell.swift */; };
 		69799EE32927EB3500A6F801 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69799EE22927EB3500A6F801 /* PhotosViewController.swift */; };
 		69799EE52927EB6800A6F801 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69799EE42927EB6800A6F801 /* PhotosTableViewCell.swift */; };
@@ -83,6 +85,9 @@
 		69D2ECDA299D5AA400721D5F /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D2ECDC299D5AA400721D5F /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		69D2ECDD299D5AA400721D5F /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
+		9822EEF05506E9AA8FC94D0A /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
+		E2B9C1D635052D5205A616BB /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E89B9A6D38BC31AC90D96167 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +95,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6974EFE229A91224003B10BB /* iOSIntPackage in Frameworks */,
 				69D2ECEF299D5AA500721D5F /* StorageService.framework in Frameworks */,
+				5F7E7DB95786BD86F77FA971 /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +161,8 @@
 				69C2D32928C3B426008C198D /* Navigation */,
 				69D2ECDB299D5AA400721D5F /* StorageService */,
 				69C2D32828C3B426008C198D /* Products */,
+				BEFCA75926E90192DE8137FB /* Pods */,
+				6EED6ED4C138FFF469135C97 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +200,23 @@
 			path = StorageService;
 			sourceTree = "<group>";
 		};
+		6EED6ED4C138FFF469135C97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2B9C1D635052D5205A616BB /* Pods_Navigation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEFCA75926E90192DE8137FB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9822EEF05506E9AA8FC94D0A /* Pods-Navigation.debug.xcconfig */,
+				E89B9A6D38BC31AC90D96167 /* Pods-Navigation.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -209,10 +235,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69C2D33B28C3B428008C198D /* Build configuration list for PBXNativeTarget "Navigation" */;
 			buildPhases = (
+				9E1D9B39AF7C31E0607721AA /* [CP] Check Pods Manifest.lock */,
 				69C2D32328C3B426008C198D /* Sources */,
 				69C2D32428C3B426008C198D /* Frameworks */,
 				69C2D32528C3B426008C198D /* Resources */,
 				69D2ECF1299D5AA500721D5F /* Embed Frameworks */,
+				A3C6434F315B889845581BB9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,6 +248,9 @@
 				69D2ECEE299D5AA500721D5F /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				6974EFE129A91224003B10BB /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = 69C2D32728C3B426008C198D /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -269,6 +300,9 @@
 				Base,
 			);
 			mainGroup = 69C2D31E28C3B426008C198D;
+			packageReferences = (
+				6974EFE029A91224003B10BB /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = 69C2D32828C3B426008C198D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,6 +331,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9E1D9B39AF7C31E0607721AA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Navigation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3C6434F315B889845581BB9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		69C2D32328C3B426008C198D /* Sources */ = {
@@ -470,6 +546,7 @@
 		};
 		69C2D33C28C3B428008C198D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9822EEF05506E9AA8FC94D0A /* Pods-Navigation.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -498,6 +575,7 @@
 		};
 		69C2D33D28C3B428008C198D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E89B9A6D38BC31AC90D96167 /* Pods-Navigation.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -619,6 +697,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6974EFE029A91224003B10BB /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6974EFE129A91224003B10BB /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6974EFE029A91224003B10BB /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 69C2D31F28C3B426008C198D /* Project object */;
 }

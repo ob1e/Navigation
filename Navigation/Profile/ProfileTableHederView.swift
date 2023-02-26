@@ -2,7 +2,7 @@
 //  ProfileHeaderView.swift
 //  Navigation
 
-
+import SnapKit
 import UIKit
 
 class ProfileTableHederView: UITableViewHeaderFooterView {
@@ -86,7 +86,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     }()
     
     lazy var transparentBackground: UIView = {
-        let view = UIView()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.isHidden = true
@@ -176,39 +176,79 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         self.addSubview(statusLabel)
         self.addSubview(avatarImageView)
         self.addSubview(buttonClose)
+        
+        fullNameLabel.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().offset(27)
+            maker.trailing.equalToSuperview().offset(-16)
+            maker.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+        }
+        
+        avatarImageView.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().offset(16)
+            maker.leading.equalToSuperview().offset(16)
+            maker.height.width.equalTo(100)
+        }
+        
+        statusLabel.snp.makeConstraints { maker in
+            maker.bottom.equalTo(setStatusButton.snp.top).offset(-71)
+            maker.trailing.equalToSuperview().offset(-16)
+            maker.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+        }
+        
+        statusTextField.snp.makeConstraints { maker in
+            maker.height.equalTo(40)
+            maker.top.equalTo(statusLabel.snp.bottom).offset(15)
+            maker.trailing.equalToSuperview().offset(-16)
+            maker.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+        }
+        
+        setStatusButton.snp.makeConstraints { maker in
+            maker.height.equalTo(50)
+            maker.top.equalTo(avatarImageView.snp.bottom).offset(50)
+            maker.leading.equalToSuperview().offset(16)
+            maker.trailing.equalToSuperview().offset(-16)
+            maker.bottom.equalToSuperview().offset(-16)
+        }
+        
+        buttonClose.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().offset(25)
+            maker.trailing.equalToSuperview().offset(-20)
+        }
+        
 
-        NSLayoutConstraint.activate([
-            
-            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            
-            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -71),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
-            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 50),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
-            
-            buttonClose.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
-            buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            
-            transparentBackground.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
-            transparentBackground.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        ])
+
+//        NSLayoutConstraint.activate([
+//
+//            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+//            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+//
+//            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+//            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+//            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+//            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+//
+//            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -71),
+//            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+//
+//            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+//            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
+//            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+//
+//            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 50),
+//            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+//            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+//            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+//
+//            buttonClose.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
+//            buttonClose.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+//
+//            transparentBackground.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+//            transparentBackground.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+//        ])
     }
 }
 

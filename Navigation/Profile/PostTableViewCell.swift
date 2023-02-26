@@ -2,7 +2,7 @@
 //  CustomTableViewCell.swift
 //  Navigation
 
-
+import iOSIntPackage
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
@@ -79,6 +79,9 @@ class PostTableViewCell: UITableViewCell {
         self.likesPost.text = nil
         self.viewsPost.text = nil
     }
+    // MARK: - Methods
+
+    let imageProcessor = ImageProcessor() // Структура из зависимости iOSIntPackage
     
     func setup(with viewModel: ViewModel) {
         self.indexPath = viewModel.indexPath
@@ -87,6 +90,13 @@ class PostTableViewCell: UITableViewCell {
         self.imagePost.image = viewModel.image
         self.likesPost.text = viewModel.likes
         self.viewsPost.text = viewModel.views
+        
+        guard let images = imagePost.image else { return }
+ // применение фильтров на картинки постов
+        imageProcessor.processImage(sourceImage: images, filter: .fade) {
+            filterImage in imagePost.image = filterImage
+        }
+        
     }
     
     func setupUI() {
