@@ -25,22 +25,26 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-     lazy var testView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isHidden = false
-        view.backgroundColor = .black
-        view.layer.opacity = 0.0
-        return view
-    }()
 
     private var viewModel: [PostStruct] = [post1, post2, post3, post4]
-
     
+    let user: User
+
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
     // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
 #if DEBUG
         self.tableView.backgroundColor = .systemGray
@@ -55,28 +59,19 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Methods
-    
-    func setupUI() {
 
-        
-        
+    func setupUI() {
         setupConstraint()
     }
     
     func setupConstraint() {
-        self.view.addSubview(testView)
         self.view.addSubview(tableView)
        
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            
-            self.testView.topAnchor.constraint(equalTo: view.topAnchor),
-            self.testView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            self.testView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            self.testView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
 }
@@ -138,6 +133,9 @@ extension ProfileViewController: UITableViewDelegate {
             else {
                 return nil
             }
+            view.fullNameLabel.text = user.fullName
+            view.avatarImageView.image = user.avatar
+            view.statusLabel.text = user.status
             return view
         }
         return nil
