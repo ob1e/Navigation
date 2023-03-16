@@ -183,22 +183,20 @@ class LogInViewController: UIViewController {
 //    проверка ввода логина
     
     @objc private func logInProfile() {
-
         #if DEBUG
-        let user = TestUserService().testUser
+        let service = TestUserService()
         #else
-        let user = CurrentUserService().user
+        let service = CurrentUserService()
         #endif
         
-        if loginTextField.text == user.login {
-            let profileUser = ProfileViewController(user: user)
-            navigationController?.pushViewController(profileUser, animated: true)
-        }else {
+        if let user = service.userService(login: loginTextField.text ?? "") {
+            let profileVC = ProfileViewController(user: user)
+            navigationController?.setViewControllers([profileVC], animated: true)
+        }else   {
             let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
-            present(alertController,animated: true)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
+                        present(alertController,animated: true)
         }
-    
     }
     
 }
