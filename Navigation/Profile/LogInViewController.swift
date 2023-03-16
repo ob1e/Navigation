@@ -180,9 +180,23 @@ class LogInViewController: UIViewController {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
+//    проверка ввода логина
+    
     @objc private func logInProfile() {
-        let profileViewController = ProfileViewController ()
-        navigationController?.pushViewController(profileViewController, animated: true)
+        #if DEBUG
+        let service = TestUserService()
+        #else
+        let service = CurrentUserService()
+        #endif
+        
+        if let user = service.userService(login: loginTextField.text ?? "") {
+            let profileVC = ProfileViewController(user: user)
+            navigationController?.setViewControllers([profileVC], animated: true)
+        }else   {
+            let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
+                        present(alertController,animated: true)
+        }
     }
     
 }

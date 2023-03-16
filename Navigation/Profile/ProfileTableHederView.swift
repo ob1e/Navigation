@@ -9,10 +9,9 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
 
-    let fullNameLabel: UILabel = {
+    lazy var fullNameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.text = "Sainchuk Nikolay"
         name.textColor = .black
         name.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return name
@@ -22,7 +21,6 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.isUserInteractionEnabled = true
-        image.image = UIImage(named: "photo")
         image.layer.borderWidth = 3
         image.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
         image.layer.cornerRadius = 50
@@ -35,7 +33,6 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     let statusLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Waiting for something..."
         view.textColor = .gray
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return view
