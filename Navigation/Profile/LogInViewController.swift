@@ -9,6 +9,9 @@ class LogInViewController: UIViewController {
     
     // MARK: - Properties
     
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     // Scroll
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -189,17 +192,32 @@ class LogInViewController: UIViewController {
         let service = CurrentUserService()
         #endif
         
-        if let user = service.userService(login: loginTextField.text ?? "") {
-            let profileVC = ProfileViewController(user: user)
+//        if let user = service.userService(login: loginTextField.text ?? "") {
+//            let profileVC = ProfileViewController(user: user)
+//            navigationController?.setViewControllers([profileVC], animated: true)
+//        }else   {
+//            let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
+//                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
+//                        present(alertController,animated: true)
+//        }
+
+        if loginDelegate?.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
+         
+            guard let user = service.userService(login: loginTextField.text ?? "")else {return print("opps")}
+            let profileVC = ProfileViewController(user: user )
             navigationController?.setViewControllers([profileVC], animated: true)
+            
         }else   {
             let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
                         present(alertController,animated: true)
         }
     }
-    
 }
+
+
+
+
 
 
 extension LogInViewController: UITextFieldDelegate {
@@ -216,4 +234,13 @@ extension LogInViewController: UITextFieldDelegate {
         return true
     }
 }
+
+//extension LogInViewController: LoginViewControllerDelegate {
+//    func check(login: String, password: String) -> Bool {
+//        print("login is correct")
+//        return true
+//    }
+//
+//
+//}
 
