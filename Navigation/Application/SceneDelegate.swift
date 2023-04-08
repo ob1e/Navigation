@@ -20,18 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = ViewController()
-//        window.makeKeyAndVisible()
-//        self.window = window
+
         
         
         //    MARK: 2
             let tabBarController = TabBarController()
+            let feedViewController = FeedViewController()
+            let loginViewController = LogInViewController()
+//            loginViewController.loginDelegate = LoginInspector()
+//        let factory = MyLoginFactory()
+            let factoryDelegate = MyLoginFactory().makeLoginInspector()
+            loginViewController.loginDelegate = factoryDelegate
+        
             
         //    MARK: 3
-            firstTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-            secondTabNavigationController = UINavigationController.init(rootViewController: LogInViewController())
+            firstTabNavigationController = UINavigationController.init(rootViewController: feedViewController)
+            secondTabNavigationController = UINavigationController.init(rootViewController: loginViewController)
             
         //    MARK: 4
             
@@ -49,9 +53,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //    MARK: 7
         UITabBar.appearance().tintColor = UIColor(red: 95/255.0, green: 132/255.0, blue: 200/255.0, alpha: 1.0)
         UITabBar.appearance().backgroundColor = .systemGray6
-            
+        
         //    MARK: 8
             let window = UIWindow(windowScene: windowScene)
+
             window.rootViewController = tabBarController
             window.makeKeyAndVisible()
             self.window = window
