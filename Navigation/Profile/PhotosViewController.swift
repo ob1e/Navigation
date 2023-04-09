@@ -4,14 +4,19 @@
 // Коллекция фотографии
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    
+    
+    
+    var imagePublisher = ImagePublisherFacade()
+    var viewModel: [UIImage] = [] //пустой массив для фотогаллереи
+    var photosArray = PhotoGallery().photosArray //массив с фотографиями для галлереи
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
     }
-    
-    let viewModel: [UIImage] = [ UIImage(named: "dog1")!, UIImage(named: "dog2")!, UIImage(named: "dog3")!, UIImage(named: "dog4")!, UIImage(named: "dog5")!, UIImage(named: "dog6")!, UIImage(named: "dog7")!, UIImage(named: "dog8")!, UIImage(named: "dog9")!, UIImage(named: "dog10")!, UIImage(named: "dog11")!, UIImage(named: "dog12")!, UIImage(named: "dog14")!, UIImage(named: "dog15")!, UIImage(named: "dog16")!, UIImage(named: "dog18")!, UIImage(named: "dog19")!, UIImage(named: "dog20")!, UIImage(named: "dog21")!, UIImage(named: "dog22")! ]
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -40,8 +45,11 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
+        imagePublisher.subscribe(self)
+        imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photosArray)
     }
     
+
     func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false // большой заголовок
         navigationItem.title = "Photo Gallery"
@@ -50,6 +58,10 @@ class PhotosViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        imagePublisher.removeSubscription(for: self)
     }
     
     func setupView() {
@@ -93,5 +105,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         let itemWidth = floor(width / Constants.numberOfItemsInLine)
         
         return CGSize(width: itemWidth, height: itemWidth)
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        viewModel = images
+        collectionView.reloadData()
     }
 }
