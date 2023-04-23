@@ -80,16 +80,25 @@ class LogInViewController: UIViewController {
     }()
     // Button
     private lazy var button: CustomButton = {
-        let button = CustomButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.setTitle("Log in", for: .normal)
-        button.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel")!)
-        button.addTarget(self, action: #selector(logInProfile), for: .touchUpInside)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.clipsToBounds = true
+        let button = CustomButton(title: "Log in")
+        button.buttonTapped = {
+            button.addTarget(self, action: #selector(self.logInProfile), for: .touchUpInside)
+        }
         return button
     }()
+    
+//    private lazy var button: CustomButton = {
+//        let button = CustomButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.layer.cornerRadius = 10
+//        button.setTitle("Log in", for: .normal)
+//        button.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel")!)
+//        button.addTarget(self, action: #selector(logInProfile), for: .touchUpInside)
+//        button.imageView?.contentMode = .scaleAspectFill
+//        button.clipsToBounds = true
+//
+//        return button
+//    }()
     
     
     
@@ -113,6 +122,7 @@ class LogInViewController: UIViewController {
         scrollView.addSubview(button)
         stackView.addArrangedSubview(loginTextField)
         stackView.addArrangedSubview(passwordTextField)
+        
         
         NSLayoutConstraint .activate([
             
