@@ -11,6 +11,10 @@ import UIKit
 
 public struct Post {
     public var title: String
+    
+    init(title: String) {
+        self.title = title
+    }
 }
 
 

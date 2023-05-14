@@ -11,7 +11,27 @@ import UIKit
 class FeedViewController: UIViewController {
 
     // MARK: - Properties
-   var dataSource = Post(title: "Title post")
+//   var dataSource = Post(title: "Title post")
+//
+//    var posts: [Post] = []
+    
+    private let viewModel: FeedViewModelProtocol?
+    weak var coordinator: FeedCoordinator?
+    
+//    private var toShowCheck: Bool {
+//        guard let title = checkGuessButton.titleLabel?.text else {
+//            return true
+//        }
+//        switch title {
+//        case FeedViewModel.CheckInfo.showTextFalse:
+//            return false
+//        case FeedViewModel.CheckInfo.showTextTrue:
+//            return true
+//        default:
+//            return true
+//        }
+//    }
+   
     
     private lazy var  scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -36,7 +56,7 @@ class FeedViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.isHidden = true
-        label.textColor = .red
+        label.textColor = .blue
         label.textAlignment = .center
         return label
     }()
@@ -85,6 +105,7 @@ class FeedViewController: UIViewController {
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(title: "Chek Password")
         let feedModel = FeedModel()
+//        button.addTarget(self, action: #selector(self.didTapCheck), for: .touchUpInside)
         button.buttonTapped = {
             guard let text = self.password.text else {return}
             if feedModel.check(word: text) == true {
@@ -110,11 +131,25 @@ class FeedViewController: UIViewController {
         setupUI()
     }
     
+ //  Инициализатор viewModel
+    
+    init(viewModel: FeedViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     // MARK: - Methods
     
     func setupUI() {
         setupConstraints()
         setupGestures()
+        bindViewModel()
     }
 
     func setupConstraints() {
@@ -171,9 +206,21 @@ class FeedViewController: UIViewController {
     }
     
     @objc func openPost() {
-        let postViewController = PostViewController ()
-        navigationController?.pushViewController(postViewController, animated: true)
+//        viewModel.updateState(viewInput: .postButtonDidTap)
+        viewModel?.updateState(viewInput: .postButtonDidTap)
+        self.chekLabel.isHidden = true
+        
     }
+
+//    @objc func didTapCheck() {
+//        viewModel?.updateState(viewInput: .checkButtonDidTap(toShowCheck: toShowCheck))
+//    }
+    
+//    @objc func openPost() {
+//        let postViewController = PostViewController ()
+//        navigationController?.pushViewController(postViewController, animated: true)
+//        chekLabel.isHidden = true
+//    }
     
     //Hidin Keyboard
     private func setupGestures() {
@@ -220,6 +267,23 @@ class FeedViewController: UIViewController {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
+    func bindViewModel() {
+        viewModel?.onStateDidChange = { [weak self] state in
+            guard let self = self else {
+                return
+            }
+            switch state {
+            case  .openPost:
+                self.chekLabel.isHidden = true
+                print("Open post")
+            case .checkLableShow:
+                self.chekLabel.isHidden = false
+                print("lable show")
+            case .initial:
+                print("initial")
+            }
+        }
+    }
 }
 
 extension FeedViewController: UITextFieldDelegate {
