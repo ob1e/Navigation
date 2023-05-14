@@ -10,12 +10,14 @@ class LogInViewController: UIViewController {
     // MARK: - Properties
     
     
-    var loginDelegate: LoginViewControllerDelegate?
+//    var loginDelegate: LoginViewControllerDelegate?
+    var loginDelegate: LoginInspector
     private let viewModel: ProfileViewModelProtocol
-//    var coordinator: ProfilCoordinator
+
     
-    init(viewModel:  ProfileViewModelProtocol) {
+    init(viewModel:  ProfileViewModelProtocol,loginDelegate: LoginInspector ) {
         self.viewModel = viewModel
+        self.loginDelegate = loginDelegate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -193,38 +195,18 @@ class LogInViewController: UIViewController {
     }
     
 //    проверка ввода логина
-//    @objc private func loginInProfile() {
-////        coordinator.pushProfileViewController()
-//        print("Log In")
-//    }
-    
-//    func errorAlert() {
-//        let alert = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .destructive))
-//        present(alert, animated: true)
-//    }
+
     @objc private func logInProfile() {
         #if DEBUG
         let service = TestUserService()
         #else
         let service = CurrentUserService()
         #endif
-        
-//        if let user = service.userService(login: loginTextField.text ?? "") {
-//            let profileVC = ProfileViewController(user: user)
-//            navigationController?.setViewControllers([profileVC], animated: true)
-//        }else   {
-//            let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
-//                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
-//                        present(alertController,animated: true)
-//        }
 
-        if loginDelegate?.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
+        if loginDelegate.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
          
             guard let user = service.userService(login: loginTextField.text ?? "")else {return print("opps")}
-//            let profileVC = ProfileViewController(user: user )
             viewModel.updateState(viewInput: .loginButtonDidTap, user: user)
-//            navigationController?.setViewControllers([profileVC], animated: true)
             
         }else   {
             let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)

@@ -147,21 +147,10 @@
 			path = TabbarModule;
 			sourceTree = "<group>";
 		};
-		697F0A7128C6744E00B4F9AB /* FirstModule */ = {
-			isa = PBXGroup;
-			children = (
-				697F0A7928C6754C00B4F9AB /* InfoViewController.swift */,
-				69811F0828CE2046001867B8 /* Post.swift */,
-			);
-			path = FirstModule;
-			sourceTree = "<group>";
-		};
 		69A1D04728D3ABF80091301A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				69A1D04828D3AC2E0091301A /* ProfileTableHederView.swift */,
-				6973B8C028F735E700DDBB39 /* LogInViewController.swift */,
-				697F0A7528C674AE00B4F9AB /* ProfileViewController.swift */,
 				69762A66291AC5030054AA7D /* PostTableViewCell.swift */,
 				69799EE22927EB3500A6F801 /* PhotosViewController.swift */,
 				69799EE42927EB6800A6F801 /* PhotosTableViewCell.swift */,
@@ -198,6 +187,8 @@
 			children = (
 				69A7702129F6F9870061579E /* FeedViewModel.swift */,
 				697F0A7328C6748900B4F9AB /* FeedViewController.swift */,
+				697F0A7728C6752B00B4F9AB /* PostViewController.swift */,
+				697F0A7928C6754C00B4F9AB /* InfoViewController.swift */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -205,8 +196,9 @@
 		69A7701E29F6F6CF0061579E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				6973B8C028F735E700DDBB39 /* LogInViewController.swift */,
 				6982A9FA29FD651D00828BA1 /* ProfileViewModel.swift */,
-				697F0A7728C6752B00B4F9AB /* PostViewController.swift */,
+				697F0A7528C674AE00B4F9AB /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -224,6 +216,7 @@
 			children = (
 				69C2734E29E4847400B49B8B /* FeedModel.swift */,
 				694C798E29AE8292000C5CDF /* User.swift */,
+				69811F0828CE2046001867B8 /* Post.swift */,
 				6954BDFF29C391CC00010C5C /* Checker.swift */,
 				69C2735029E4860000B49B8B /* CustomButton.swift */,
 			);
@@ -257,7 +250,6 @@
 				69A7702329F6FD0E0061579E /* Factory */,
 				69C2734D29E4845600B49B8B /* Model */,
 				697F0A7028C6718400B4F9AB /* TabbarModule */,
-				697F0A7128C6744E00B4F9AB /* FirstModule */,
 				69A1D04728D3ABF80091301A /* Profile */,
 				69C2D32E28C3B426008C198D /* ViewController.swift */,
 				69C2D33328C3B428008C198D /* Assets.xcassets */,

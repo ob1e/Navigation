@@ -22,7 +22,7 @@ final class AppFactory {
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         case .profile:
             let viewModel = ProfileViewModel(userService: userService)
-            let view = UINavigationController(rootViewController: LogInViewController(viewModel: viewModel))
+            let view = UINavigationController(rootViewController: LogInViewController(viewModel: viewModel, loginDelegate: LoginInspector()))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
