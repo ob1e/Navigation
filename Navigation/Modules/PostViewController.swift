@@ -11,8 +11,28 @@ import UIKit
 class PostViewController: UIViewController {
     
     // MARK: - Properties
+    private let post = Post(title: "Title post")
     
-    var dataSource = FeedViewController()
+//    init(post: Post) {
+//        self.post = post
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    @available(*, unavailable)
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+////    var viewModel: FeedViewModelProtocol
+////
+////    init(viewModel: FeedViewModelProtocol) {
+////        self.viewModel = viewModel
+////        super.init(nibName: nil, bundle: nil)
+////    }
+////
+////    required init?(coder: NSCoder) {
+////        fatalError("init(coder:) has not been implemented")
+////    }
+//
+//    lazy var dataSource = FeedViewController(viewModel: viewModel)
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -34,7 +54,7 @@ class PostViewController: UIViewController {
     func setupUI() {
         view.backgroundColor = .darkGray
         setupBarButtonItem()
-        titleLabel.text = dataSource.dataSource.title 
+        titleLabel.text = post.title
         setupConstraints()
     }
     

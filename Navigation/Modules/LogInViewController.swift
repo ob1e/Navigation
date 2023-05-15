@@ -10,8 +10,21 @@ class LogInViewController: UIViewController {
     // MARK: - Properties
     
     
-    var loginDelegate: LoginViewControllerDelegate?
+//    var loginDelegate: LoginViewControllerDelegate?
+    var loginDelegate: LoginInspector
+    private let viewModel: ProfileViewModelProtocol
+
     
+    init(viewModel:  ProfileViewModelProtocol,loginDelegate: LoginInspector ) {
+        self.viewModel = viewModel
+        self.loginDelegate = loginDelegate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // Scroll
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -37,7 +50,7 @@ class LogInViewController: UIViewController {
         return logo
     }()
     //    Username
-    private lazy var loginTextField: UITextField = {
+     lazy var loginTextField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.tag = 0
@@ -55,10 +68,11 @@ class LogInViewController: UIViewController {
         login.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         login.delegate = self
         login.tintColor = UIColor(named: "AccentColor")
+        login.text = "sainchuk"
         return login
     }()
     //    Password
-    private lazy var passwordTextField: UITextField = {
+     lazy var passwordTextField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.tag = 1
@@ -76,6 +90,7 @@ class LogInViewController: UIViewController {
         password.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         password.delegate = self
         password.tintColor = UIColor(named: "AccentColor")
+        password.text = "123"
         return password
     }()
     // Button
@@ -87,21 +102,7 @@ class LogInViewController: UIViewController {
         return button
     }()
     
-//    private lazy var button: CustomButton = {
-//        let button = CustomButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 10
-//        button.setTitle("Log in", for: .normal)
-//        button.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel")!)
-//        button.addTarget(self, action: #selector(logInProfile), for: .touchUpInside)
-//        button.imageView?.contentMode = .scaleAspectFill
-//        button.clipsToBounds = true
-//
-//        return button
-//    }()
-    
-    
-    
+ 
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,28 +195,18 @@ class LogInViewController: UIViewController {
     }
     
 //    проверка ввода логина
-    
+
     @objc private func logInProfile() {
         #if DEBUG
         let service = TestUserService()
         #else
         let service = CurrentUserService()
         #endif
-        
-//        if let user = service.userService(login: loginTextField.text ?? "") {
-//            let profileVC = ProfileViewController(user: user)
-//            navigationController?.setViewControllers([profileVC], animated: true)
-//        }else   {
-//            let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
-//                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
-//                        present(alertController,animated: true)
-//        }
 
-        if loginDelegate?.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
+        if loginDelegate.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
          
             guard let user = service.userService(login: loginTextField.text ?? "")else {return print("opps")}
-            let profileVC = ProfileViewController(user: user )
-            navigationController?.setViewControllers([profileVC], animated: true)
+            viewModel.updateState(viewInput: .loginButtonDidTap, user: user)
             
         }else   {
             let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
@@ -224,7 +215,6 @@ class LogInViewController: UIViewController {
         }
     }
 }
-
 
 
 
@@ -245,12 +235,11 @@ extension LogInViewController: UITextFieldDelegate {
     }
 }
 
-//extension LogInViewController: LoginViewControllerDelegate {
-//    func check(login: String, password: String) -> Bool {
-//        print("login is correct")
-//        return true
-//    }
-//
-//
-//}
+extension LogInViewController: LoginViewControllerDelegate {
+    func check(login: String, password: String) -> Bool {
+        print("login is correct")
+        return true
+    }
+}
+
 
