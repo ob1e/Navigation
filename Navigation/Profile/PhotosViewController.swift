@@ -8,11 +8,13 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    // MARK: - Properties
     
-    
-    var imagePublisher = ImagePublisherFacade()
+//    var imagePublisher = ImagePublisherFacade()
+   
     var viewModel: [UIImage] = [] //пустой массив для фотогаллереи
-    var photosArray = PhotoGallery().photosArray //массив с фотографиями для галлереи
+    var imageProcessor = ImageProcessor()
+    var photoArray = PhotoGallery().photosArray //массив с фотографиями для галлереи
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -39,16 +41,24 @@ class PhotosViewController: UIViewController {
     }()
     
     
-    // MARK: Life cycle
+// MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
-        imagePublisher.subscribe(self)
-        imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photosArray)
+        DispatchQueue.main.async {
+            self.imageProcessorBackground()
+//            self.imageProcessorDefault()
+//            self.imageProcessorUserInit()
+//            self.imageProcessorUserInteracrive()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute:{
+            self.collectionView.reloadData()
+        })
     }
     
+//MARK: - Methods
 
     func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false // большой заголовок
@@ -60,9 +70,60 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        imagePublisher.removeSubscription(for: self)
+    func imageProcessorBackground() {
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .chrome, qos: .background) { image in
+            for items in image {
+                self.viewModel.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nano) / 1000000000
+            print("Execution time background \(timeInterval)")
+        }
     }
+    
+    func imageProcessorDefault() {
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .colorInvert, qos: .default) { image in
+            for items in image {
+                self.viewModel.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nano) / 1000000000
+            print("Execution time default \(timeInterval)")
+        }
+    }
+    
+    func imageProcessorUserInit() {
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .fade, qos: .userInitiated) { image in
+            for items in image {
+                self.viewModel.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nano) / 1000000000
+            print("Execution time userInitiated \(timeInterval)")
+        }
+    }
+    
+    func imageProcessorUserInteracrive() {
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .noir, qos: .userInteractive) { image in
+            for items in image {
+                self.viewModel.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nano) / 1000000000
+            print("Execution time userInteractive \(timeInterval)")
+        }
+    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        imagePublisher.removeSubscription(for: self)
+//    }
     
     func setupView() {
         self.view.backgroundColor = .systemBackground
