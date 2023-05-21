@@ -10,11 +10,9 @@ class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     
-//    var imagePublisher = ImagePublisherFacade()
-   
-    var viewModel: [UIImage] = [] //пустой массив для фотогаллереи
+
     var imageProcessor = ImageProcessor()
-    var photoArray = PhotoGallery().photosArray //массив с фотографиями для галлереи
+    var viewModel = PhotoGallery().photosArray //массив с фотографиями для галлереи
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -47,15 +45,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
-        DispatchQueue.main.async {
-            self.imageProcessorBackground()
-//            self.imageProcessorDefault()
-//            self.imageProcessorUserInit()
-//            self.imageProcessorUserInteracrive()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute:{
-            self.collectionView.reloadData()
-        })
+        self.imageProcessorNew(qos: .background)
     }
     
 //MARK: - Methods
@@ -70,60 +60,18 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    func imageProcessorBackground() {
-        let start = DispatchTime.now()
-        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .chrome, qos: .background) { image in
-            for items in image {
-                self.viewModel.append(UIImage(cgImage: items!))
+    func imageProcessorNew(qos: QualityOfService) {
+        let startDate = Date()
+        imageProcessor.processImagesOnThread(sourceImages: viewModel, filter: .chrome, qos: qos) { [weak self] images in
+            self?.viewModel = images
+                .compactMap{ $0 }
+                .map{ UIImage(cgImage: $0)}
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
             }
-            let end = DispatchTime.now()
-            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
-            let timeInterval = Double(nano) / 1000000000
-            print("Execution time background \(timeInterval)")
+            print("Process time: \(Date().timeIntervalSince(startDate)) seconds")
         }
     }
-    
-    func imageProcessorDefault() {
-        let start = DispatchTime.now()
-        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .colorInvert, qos: .default) { image in
-            for items in image {
-                self.viewModel.append(UIImage(cgImage: items!))
-            }
-            let end = DispatchTime.now()
-            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
-            let timeInterval = Double(nano) / 1000000000
-            print("Execution time default \(timeInterval)")
-        }
-    }
-    
-    func imageProcessorUserInit() {
-        let start = DispatchTime.now()
-        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .fade, qos: .userInitiated) { image in
-            for items in image {
-                self.viewModel.append(UIImage(cgImage: items!))
-            }
-            let end = DispatchTime.now()
-            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
-            let timeInterval = Double(nano) / 1000000000
-            print("Execution time userInitiated \(timeInterval)")
-        }
-    }
-    
-    func imageProcessorUserInteracrive() {
-        let start = DispatchTime.now()
-        self.imageProcessor.processImagesOnThread(sourceImages: photoArray, filter: .noir, qos: .userInteractive) { image in
-            for items in image {
-                self.viewModel.append(UIImage(cgImage: items!))
-            }
-            let end = DispatchTime.now()
-            let nano = end.uptimeNanoseconds - start.uptimeNanoseconds
-            let timeInterval = Double(nano) / 1000000000
-            print("Execution time userInteractive \(timeInterval)")
-        }
-    }
-//    override func viewDidDisappear(_ animated: Bool) {
-//        imagePublisher.removeSubscription(for: self)
-//    }
     
     func setupView() {
         self.view.backgroundColor = .systemBackground
@@ -169,9 +117,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        viewModel = images
-        collectionView.reloadData()
-    }
-}
+
