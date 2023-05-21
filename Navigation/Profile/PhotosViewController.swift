@@ -8,11 +8,11 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    // MARK: - Properties
     
-    
-    var imagePublisher = ImagePublisherFacade()
-    var viewModel: [UIImage] = [] //пустой массив для фотогаллереи
-    var photosArray = PhotoGallery().photosArray //массив с фотографиями для галлереи
+
+    var imageProcessor = ImageProcessor()
+    var viewModel = PhotoGallery().photosArray //массив с фотографиями для галлереи
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -39,16 +39,16 @@ class PhotosViewController: UIViewController {
     }()
     
     
-    // MARK: Life cycle
+// MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
-        imagePublisher.subscribe(self)
-        imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photosArray)
+        self.imageProcessorNew(qos: .background)
     }
     
+//MARK: - Methods
 
     func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false // большой заголовок
@@ -60,8 +60,17 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        imagePublisher.removeSubscription(for: self)
+    func imageProcessorNew(qos: QualityOfService) {
+        let startDate = Date()
+        imageProcessor.processImagesOnThread(sourceImages: viewModel, filter: .chrome, qos: qos) { [weak self] images in
+            self?.viewModel = images
+                .compactMap{ $0 }
+                .map{ UIImage(cgImage: $0)}
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+            print("Process time: \(Date().timeIntervalSince(startDate)) seconds")
+        }
     }
     
     func setupView() {
@@ -108,9 +117,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        viewModel = images
-        collectionView.reloadData()
-    }
-}
+
