@@ -29,7 +29,6 @@
 		69A7702229F6F9870061579E /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A7702129F6F9870061579E /* FeedViewModel.swift */; };
 		69A7702529F6FD330061579E /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A7702429F6FD330061579E /* AppFactory.swift */; };
 		69A7702729F705EC0061579E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A7702629F705EC0061579E /* AppCoordinator.swift */; };
-		69AC308C2A27C2BC00599A0F /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AC308B2A27C2BC00599A0F /* BruteForce.swift */; };
 		69B9872828C7C8F60013D319 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9872728C7C8F60013D319 /* AppTabBarController.swift */; };
 		69C2734F29E4847400B49B8B /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2734E29E4847400B49B8B /* FeedModel.swift */; };
 		69C2735129E4860000B49B8B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2735029E4860000B49B8B /* CustomButton.swift */; };
@@ -96,7 +95,6 @@
 		69A7702129F6F9870061579E /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		69A7702429F6FD330061579E /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		69A7702629F705EC0061579E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		69AC308B2A27C2BC00599A0F /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		69B9872728C7C8F60013D319 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		69C2734E29E4847400B49B8B /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		69C2735029E4860000B49B8B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				69811F0828CE2046001867B8 /* Post.swift */,
 				6954BDFF29C391CC00010C5C /* Checker.swift */,
 				69C2735029E4860000B49B8B /* CustomButton.swift */,
-				69AC308B2A27C2BC00599A0F /* BruteForce.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,7 +412,6 @@
 				69A7702529F6FD330061579E /* AppFactory.swift in Sources */,
 				69A7701B29F6F4DE0061579E /* Coordinatable.swift in Sources */,
 				694C798F29AE8292000C5CDF /* User.swift in Sources */,
-				69AC308C2A27C2BC00599A0F /* BruteForce.swift in Sources */,
 				69799EE72927EB9200A6F801 /* PhotosCollectionViewCell.swift in Sources */,
 				69C2D32D28C3B426008C198D /* SceneDelegate.swift in Sources */,
 				69891EA029F9944D00906B86 /* FeedCoordinator.swift in Sources */,

@@ -17,21 +17,7 @@ class FeedViewController: UIViewController {
     
     private let viewModel: FeedViewModelProtocol?
     weak var coordinator: FeedCoordinator?
-    
-//    private var toShowCheck: Bool {
-//        guard let title = checkGuessButton.titleLabel?.text else {
-//            return true
-//        }
-//        switch title {
-//        case FeedViewModel.CheckInfo.showTextFalse:
-//            return false
-//        case FeedViewModel.CheckInfo.showTextTrue:
-//            return true
-//        default:
-//            return true
-//        }
-//    }
-   
+
     
     private lazy var  scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -82,30 +68,15 @@ class FeedViewController: UIViewController {
         return textField
     }()
     
-    private lazy var buttonOne: CustomButton = {
-        let button = CustomButton(title: "Post 1")
-        button.buttonTapped = {
-            button.addTarget(self, action: #selector(self.openPost), for: .touchUpInside)
-        }
-        
-        return button
-        
-    }()
-    
-    private lazy var buttonTwo: CustomButton = {
-        let button = CustomButton(title: "Post 2")
-        button.buttonTapped = {
-            button.addTarget(self, action: #selector(self.openPost), for: .touchUpInside)
-        }
-        return button
-        
-    }()
+
+    private var buttonOne = CustomButton(title: "Post 1")
+    private var buttonTwo = CustomButton(title: "Post 2")
+
     
 // Кнопка проверки введенного текста
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(title: "Chek Password")
         let feedModel = FeedModel()
-//        button.addTarget(self, action: #selector(self.didTapCheck), for: .touchUpInside)
         button.buttonTapped = {
             guard let text = self.password.text else {return}
             if feedModel.check(word: text) == true {
@@ -150,6 +121,13 @@ class FeedViewController: UIViewController {
         setupConstraints()
         setupGestures()
         bindViewModel()
+        buttonOne.buttonTapped =  {self.viewModel?.updateState(viewInput: .postButtonDidTap)
+            self.chekLabel.isHidden = true}
+        buttonTwo.buttonTapped = {
+            self.viewModel?.updateState(viewInput: .postButtonDidTap)
+            self.chekLabel.isHidden = true
+        }
+        
     }
 
     func setupConstraints() {

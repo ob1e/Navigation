@@ -14,8 +14,7 @@ class LogInViewController: UIViewController {
 //    var loginDelegate: LoginViewControllerDelegate?
     var loginDelegate: LoginInspector
     private let viewModel: ProfileViewModelProtocol
-    
-    var brutForce =  BruteForce()
+
 
     
     init(viewModel:  ProfileViewModelProtocol,loginDelegate: LoginInspector ) {
@@ -99,28 +98,11 @@ class LogInViewController: UIViewController {
     // Button
     private lazy var button: CustomButton = {
         let button = CustomButton(title: "Log in")
-        button.buttonTapped = {
-            button.addTarget(self, action: #selector(self.logInProfile), for: .touchUpInside)
-        }
+        button.addTarget(self, action: #selector(self.logInProfile), for: .touchUpInside)
+        
         return button
     }()
-  // Button подбора пароля
-    private lazy var buttonBruteForce: CustomButton = {
-        let button = CustomButton(title: "Подобрать пароль")
-        button.buttonTapped = {
-            button.addTarget(self, action: #selector(self.bruteForce), for: .touchUpInside)
-        }
-        return button
-    }()
-    //Activity Indicator
-    private var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.isHidden = true
-        indicator.color = .black
-        return indicator
-    }()
- 
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,11 +118,9 @@ class LogInViewController: UIViewController {
     
     func setupConstraint() {
         self.view.addSubview(scrollView)
-        scrollView.addSubview(activityIndicator)
         scrollView.addSubview(stackView)
         scrollView.addSubview(logoImage)
         scrollView.addSubview(button)
-        scrollView.addSubview(buttonBruteForce)
         
         stackView.addArrangedSubview(loginTextField)
         stackView.addArrangedSubview(passwordTextField)
@@ -167,15 +147,7 @@ class LogInViewController: UIViewController {
             button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
             button.heightAnchor.constraint(equalToConstant: 50),
             button.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            button.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            
-            buttonBruteForce.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 16),
-            buttonBruteForce.heightAnchor.constraint(equalToConstant: 50),
-            buttonBruteForce.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            buttonBruteForce.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            
-            activityIndicator.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 32),
-            activityIndicator.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            button.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16)
             
         ])
     }
@@ -245,22 +217,7 @@ class LogInViewController: UIViewController {
         }
     }
     
-    @objc func bruteForce() {
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
 
-        let queue = DispatchQueue.global(qos: .background)
-        queue.async {
-            let passwordTo = self.brutForce.generatePassword(4)
-            let pass = self.brutForce.startBruteForce(passwordTo: passwordTo)
-            DispatchQueue.main.async {
-                self.passwordTextField.text = pass
-                self.passwordTextField.isSecureTextEntry = false
-                self.activityIndicator.isHidden = true
-                self.activityIndicator.stopAnimating()
-            }
-        }
-    }
 }
 
 
