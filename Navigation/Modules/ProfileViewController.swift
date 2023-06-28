@@ -10,6 +10,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     
+
     private lazy var  tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +25,6 @@ class ProfileViewController: UIViewController {
         tableView.sectionHeaderTopPadding = 0
         return tableView
     }()
-    
 
     private var viewModel: [PostStruct] = [post1, post2, post3, post4]
     
@@ -55,7 +55,15 @@ class ProfileViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.navigationBar.isHidden = true
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        //Timer
+        _ = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { _ in
+            self.showAlert()
+        })
+        
     }
     
     // MARK: - Methods
@@ -73,6 +81,13 @@ class ProfileViewController: UIViewController {
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+    }
+// Alert for timer
+     private func showAlert() {
+        let alert = UIAlertController(title: "Вышло обновление приложения.", message: "Обновите приложение чтобы воспользоваться актуальными функциями", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
 }
 
