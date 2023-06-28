@@ -25,9 +25,6 @@ class ProfileViewController: UIViewController {
         tableView.sectionHeaderTopPadding = 0
         return tableView
     }()
-// Timer
-    lazy var timer = Timer(timeInterval: 5, target: self, selector: #selector(showAlert), userInfo: nil, repeats: false)
-   
 
     private var viewModel: [PostStruct] = [post1, post2, post3, post4]
     
@@ -62,8 +59,11 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
-        timer.fire()
-        timer.invalidate()
+        //Timer
+        _ = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { _ in
+            self.showAlert()
+        })
+        
     }
     
     // MARK: - Methods
@@ -83,7 +83,7 @@ class ProfileViewController: UIViewController {
         ])
     }
 // Alert for timer
-    @objc private func showAlert() {
+     private func showAlert() {
         let alert = UIAlertController(title: "Вышло обновление приложения.", message: "Обновите приложение чтобы воспользоваться актуальными функциями", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
