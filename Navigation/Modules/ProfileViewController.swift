@@ -112,7 +112,7 @@ extension ProfileViewController: UITableViewDataSource {
         }
         return 1
     }
-    // добавлене ячеек
+    // добавление ячеек
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {

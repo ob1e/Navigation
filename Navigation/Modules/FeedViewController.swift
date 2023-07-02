@@ -121,7 +121,8 @@ class FeedViewController: UIViewController {
         setupConstraints()
         setupGestures()
         bindViewModel()
-        buttonOne.buttonTapped =  {self.viewModel?.updateState(viewInput: .postButtonDidTap)
+        buttonOne.buttonTapped =  {
+            self.viewModel?.updateState(viewInput: .postButtonDidTap)
             self.chekLabel.isHidden = true}
         buttonTwo.buttonTapped = {
             self.viewModel?.updateState(viewInput: .postButtonDidTap)
@@ -183,22 +184,31 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    @objc func openPost() {
-//        viewModel.updateState(viewInput: .postButtonDidTap)
-        viewModel?.updateState(viewInput: .postButtonDidTap)
-        self.chekLabel.isHidden = true
-        
+    enum PostError: Error{
+        case notFound
     }
-
-//    @objc func didTapCheck() {
-//        viewModel?.updateState(viewInput: .checkButtonDidTap(toShowCheck: toShowCheck))
-//    }
     
-//    @objc func openPost() {
-//        let postViewController = PostViewController ()
-//        navigationController?.pushViewController(postViewController, animated: true)
-//        chekLabel.isHidden = true
-//    }
+    @objc func openPost() {
+        
+        postError { result in
+            switch result {
+            case .success(let post):
+                print(post)
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func postError(then handler: @escaping (Result<Any, PostError>) -> Void){
+        guard let post = viewModel?.updateState(viewInput: .postButtonDidTap) else {
+            handler(.failure(.notFound))
+            return
+        }
+        handler(.success(post))
+    }
+ 
+
     
     //Hidin Keyboard
     private func setupGestures() {

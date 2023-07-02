@@ -204,16 +204,36 @@ class LogInViewController: UIViewController {
         #else
         let service = CurrentUserService()
         #endif
+        func showAlert(title: String, message: String) {
+            let alertError = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertError.addAction(UIAlertAction(title: "OK", style:  .default))
+        }
+
 
         if loginDelegate.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
-         
-            guard let user = service.userService(login: loginTextField.text ?? "")else {return print("opps")}
-            viewModel.updateState(viewInput: .loginButtonDidTap, user: user)
+            do {
+                guard let user = try service.userService(login: loginTextField.text ?? "")else {return print("opps")}
+                viewModel.updateState(viewInput: .loginButtonDidTap, user: user)
+            }
+            catch {
+                switch error {
+                case let badRequest as LoginError:
+                    showAlert(title: "badRequest", message: "Press OK")
+                    print(badRequest)
+                case  let noConnection as LoginError:
+                    showAlert(title: "noConnection", message: "Press OK")
+                    print(noConnection)
+                case let unknownError as LoginError:
+                    showAlert(title: "unknownError", message: "Press OK")
+                    print(unknownError)
+                default:
+                    print(error.localizedDescription)
+                }
+            }
             
         }else   {
-            let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин или пароль", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .destructive))
-                        present(alertController,animated: true)
+            showAlert(title: "Ошибка", message:  "Введен не верный логин или пароль")
+
         }
     }
     
