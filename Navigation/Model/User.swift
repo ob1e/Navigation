@@ -18,12 +18,12 @@ class User {
         self.avatar = avatar
         self.status = status
     }
-    
-    enum userError: Error {
-        case badRequest
-        case noConnection
-        case unknown
-    }
+}
+
+enum LoginError: Error {
+    case badRequest
+    case noConnection
+    case unknown
 }
 
 protocol UserService {

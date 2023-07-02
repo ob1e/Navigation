@@ -217,13 +217,13 @@ class LogInViewController: UIViewController {
             }
             catch {
                 switch error {
-                case let badRequest as User.userError:
+                case let badRequest as LoginError:
                     showAlert(title: "badRequest", message: "Press OK")
                     print(badRequest)
-                case  let noConnection as User.userError:
+                case  let noConnection as LoginError:
                     showAlert(title: "noConnection", message: "Press OK")
                     print(noConnection)
-                case let unknownError as User.userError:
+                case let unknownError as LoginError:
                     showAlert(title: "unknownError", message: "Press OK")
                     print(unknownError)
                 default:
