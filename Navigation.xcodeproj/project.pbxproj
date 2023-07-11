@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		694C798F29AE8292000C5CDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C798E29AE8292000C5CDF /* User.swift */; };
+		69514B6E2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69514B6D2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 */; };
 		6954BE0029C391CC00010C5C /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BDFF29C391CC00010C5C /* Checker.swift */; };
 		6973B8C128F735E700DDBB39 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973B8C028F735E700DDBB39 /* LogInViewController.swift */; };
 		69762A67291AC5030054AA7D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69762A66291AC5030054AA7D /* PostTableViewCell.swift */; };
@@ -23,6 +24,10 @@
 		69891EA029F9944D00906B86 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69891E9F29F9944D00906B86 /* FeedCoordinator.swift */; };
 		69891EA229F9A30400906B86 /* ProfilCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69891EA129F9A30400906B86 /* ProfilCoordinator.swift */; };
 		69905D37293CEE75007A9315 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69905D36293CEE75007A9315 /* CustomCell.swift */; };
+		699F70F22A533F040071F18C /* Slipknot-Psychosocial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 699F70EE2A533F020071F18C /* Slipknot-Psychosocial.mp3 */; };
+		699F70F32A533F040071F18C /* Nirvana-Smells_Like_Teen_Spirit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 699F70EF2A533F020071F18C /* Nirvana-Smells_Like_Teen_Spirit.mp3 */; };
+		699F70F42A533F040071F18C /* Bon_Jovi-Its_My_Life.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 699F70F02A533F030071F18C /* Bon_Jovi-Its_My_Life.mp3 */; };
+		699F70F52A533F040071F18C /* System_of_a_Down-Chop_Suey.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 699F70F12A533F040071F18C /* System_of_a_Down-Chop_Suey.mp3 */; };
 		69A1D04928D3AC2E0091301A /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A1D04828D3AC2E0091301A /* ProfileTableHederView.swift */; };
 		69A7701B29F6F4DE0061579E /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A7701A29F6F4DE0061579E /* Coordinatable.swift */; };
 		69A7702029F6F7270061579E /* Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A7701F29F6F7270061579E /* Modules.swift */; };
@@ -73,6 +78,7 @@
 /* Begin PBXFileReference section */
 		6948125C291EC57A009018C1 /* PostStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStruct.swift; sourceTree = "<group>"; };
 		694C798E29AE8292000C5CDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		69514B6D2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Korn_-_Freak_On_a_Leash.mp3"; sourceTree = "<group>"; };
 		6954BDFF29C391CC00010C5C /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		6973B8C028F735E700DDBB39 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		69762A66291AC5030054AA7D /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,6 +95,10 @@
 		69891E9F29F9944D00906B86 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		69891EA129F9A30400906B86 /* ProfilCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilCoordinator.swift; sourceTree = "<group>"; };
 		69905D36293CEE75007A9315 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		699F70EE2A533F020071F18C /* Slipknot-Psychosocial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slipknot-Psychosocial.mp3"; sourceTree = "<group>"; };
+		699F70EF2A533F020071F18C /* Nirvana-Smells_Like_Teen_Spirit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Nirvana-Smells_Like_Teen_Spirit.mp3"; sourceTree = "<group>"; };
+		699F70F02A533F030071F18C /* Bon_Jovi-Its_My_Life.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bon_Jovi-Its_My_Life.mp3"; sourceTree = "<group>"; };
+		699F70F12A533F040071F18C /* System_of_a_Down-Chop_Suey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "System_of_a_Down-Chop_Suey.mp3"; sourceTree = "<group>"; };
 		69A1D04828D3AC2E0091301A /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		69A7701A29F6F4DE0061579E /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
 		69A7701F29F6F7270061579E /* Modules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules.swift; sourceTree = "<group>"; };
@@ -211,6 +221,18 @@
 			path = Factory;
 			sourceTree = "<group>";
 		};
+		69BB9C872A51AEE60097A132 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				699F70F02A533F030071F18C /* Bon_Jovi-Its_My_Life.mp3 */,
+				699F70EF2A533F020071F18C /* Nirvana-Smells_Like_Teen_Spirit.mp3 */,
+				699F70EE2A533F020071F18C /* Slipknot-Psychosocial.mp3 */,
+				69514B6D2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 */,
+				699F70F12A533F040071F18C /* System_of_a_Down-Chop_Suey.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		69C2734D29E4845600B49B8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +266,7 @@
 		69C2D32928C3B426008C198D /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				69BB9C872A51AEE60097A132 /* Resources */,
 				697F0A6F28C6714D00B4F9AB /* Application */,
 				69A7701C29F6F6B50061579E /* Modules */,
 				69A7701929F6F4B30061579E /* Coordinators */,
@@ -368,8 +391,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				699F70F52A533F040071F18C /* System_of_a_Down-Chop_Suey.mp3 in Resources */,
 				69C2D33728C3B428008C198D /* LaunchScreen.storyboard in Resources */,
+				699F70F22A533F040071F18C /* Slipknot-Psychosocial.mp3 in Resources */,
+				699F70F32A533F040071F18C /* Nirvana-Smells_Like_Teen_Spirit.mp3 in Resources */,
 				69C2D33428C3B428008C198D /* Assets.xcassets in Resources */,
+				699F70F42A533F040071F18C /* Bon_Jovi-Its_My_Life.mp3 in Resources */,
+				69514B6E2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
