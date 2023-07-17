@@ -28,11 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.appCoordinator = appCoordinator
         
-        
+            /* Запуск сетевого запроса
         let appConfiguration: AppConfiguration = .first("https://swapi.dev/api/people/8")
        
         NetworkService.request(for: appConfiguration)
-        
+  */
         UITabBar.appearance().tintColor = UIColor(red: 95/255.0, green: 132/255.0, blue: 200/255.0, alpha: 1.0)
         UITabBar.appearance().backgroundColor = .systemGray6
         
