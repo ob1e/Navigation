@@ -11,6 +11,7 @@
 		69514B6E2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69514B6D2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 */; };
 		6954BE0029C391CC00010C5C /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BDFF29C391CC00010C5C /* Checker.swift */; };
 		6973B8C128F735E700DDBB39 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973B8C028F735E700DDBB39 /* LogInViewController.swift */; };
+		697409772A642E8200F84AF7 /* JsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697409762A642E8200F84AF7 /* JsonModel.swift */; };
 		69762A67291AC5030054AA7D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69762A66291AC5030054AA7D /* PostTableViewCell.swift */; };
 		69799EE32927EB3500A6F801 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69799EE22927EB3500A6F801 /* PhotosViewController.swift */; };
 		69799EE52927EB6800A6F801 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69799EE42927EB6800A6F801 /* PhotosTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		69514B6D2A5A98D000479EB9 /* Korn_-_Freak_On_a_Leash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Korn_-_Freak_On_a_Leash.mp3"; sourceTree = "<group>"; };
 		6954BDFF29C391CC00010C5C /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		6973B8C028F735E700DDBB39 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		697409762A642E8200F84AF7 /* JsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModel.swift; sourceTree = "<group>"; };
 		69762A66291AC5030054AA7D /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		69799EE22927EB3500A6F801 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		69799EE42927EB6800A6F801 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				6954BDFF29C391CC00010C5C /* Checker.swift */,
 				69C2735029E4860000B49B8B /* CustomButton.swift */,
 				697E68F42A5DD14400A37A4E /* NetworkService.swift */,
+				697409762A642E8200F84AF7 /* JsonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				69A7702229F6F9870061579E /* FeedViewModel.swift in Sources */,
 				69799EE32927EB3500A6F801 /* PhotosViewController.swift in Sources */,
 				69A1D04928D3AC2E0091301A /* ProfileTableHederView.swift in Sources */,
+				697409772A642E8200F84AF7 /* JsonModel.swift in Sources */,
 				697F0A7428C6748900B4F9AB /* FeedViewController.swift in Sources */,
 				69A7702029F6F7270061579E /* Modules.swift in Sources */,
 				69A7702529F6FD330061579E /* AppFactory.swift in Sources */,
