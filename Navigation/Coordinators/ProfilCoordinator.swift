@@ -33,11 +33,12 @@ final class ProfilCoordinator: ModuleCoordinatable {
     
     
     
-    func pushProfileViewController(user: User) {
-        let viewControllerToPush = ProfileViewController(user: user)
+    func pushProfileViewController() {
+        let viewControllerToPush = ProfileViewController()
         (module?.view as? UINavigationController)?.setViewControllers([viewControllerToPush], animated: true)
         
         
     }
     
 }
+    

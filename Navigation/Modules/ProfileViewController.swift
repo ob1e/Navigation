@@ -27,18 +27,6 @@ class ProfileViewController: UIViewController {
     }()
 
     private var viewModel: [PostStruct] = [post1, post2, post3, post4]
-    
-    let user: User
-
-    init(user: User) {
-        self.user = user
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 
     // MARK: Life cycle
     
@@ -148,9 +136,9 @@ extension ProfileViewController: UITableViewDelegate {
             else {
                 return nil
             }
-            view.fullNameLabel.text = user.fullName
-            view.avatarImageView.image = user.avatar
-            view.statusLabel.text = user.status
+            view.fullNameLabel.text = "Cаинчук Николай"
+            view.avatarImageView.image = UIImage(named: "avatar")!
+            view.statusLabel.text = "Status"
             return view
         }
         return nil

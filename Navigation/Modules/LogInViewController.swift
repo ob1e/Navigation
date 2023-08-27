@@ -14,12 +14,14 @@ class LogInViewController: UIViewController {
 //    var loginDelegate: LoginViewControllerDelegate?
     var loginDelegate: LoginInspector
     private let viewModel: ProfileViewModelProtocol
+   var cheker: CheckerService
 
 
     
-    init(viewModel:  ProfileViewModelProtocol,loginDelegate: LoginInspector ) {
+    init(viewModel:  ProfileViewModelProtocol,loginDelegate: LoginInspector, cheker: CheckerService ) {
         self.viewModel = viewModel
         self.loginDelegate = loginDelegate
+        self.cheker = cheker
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -62,7 +64,7 @@ class LogInViewController: UIViewController {
         login.layer.borderWidth = 0.5
         login.textColor = .black
         login.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        login.placeholder = "Email or phone"
+        login.placeholder = "Email"
         login.autocapitalizationType = .none
         login.clearButtonMode = .whileEditing
         login.clipsToBounds = true
@@ -70,7 +72,7 @@ class LogInViewController: UIViewController {
         login.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         login.delegate = self
         login.tintColor = UIColor(named: "AccentColor")
-        login.text = "sainchuk"
+        login.text = "sainchuk@ya.ru"
         return login
     }()
     //    Password
@@ -92,7 +94,7 @@ class LogInViewController: UIViewController {
         password.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         password.delegate = self
         password.tintColor = UIColor(named: "AccentColor")
-        password.text = "123"
+        password.text = "123456"
         return password
     }()
     // Button
@@ -196,45 +198,14 @@ class LogInViewController: UIViewController {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
-//    проверка ввода логина
 
+    
     @objc private func logInProfile() {
-        #if DEBUG
-        let service = TestUserService()
-        #else
-        let service = CurrentUserService()
-        #endif
-        func showAlert(title: String, message: String) {
-            let alertError = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertError.addAction(UIAlertAction(title: "OK", style:  .default))
-        }
+        let login = self.loginTextField.text ?? ""
+        let password = self.passwordTextField.text ?? ""
+        cheker.checkCredentials(login: login, password: password, loginVC: self)
 
 
-        if loginDelegate.check(login: loginTextField.text ?? "", password: passwordTextField.text ?? "") == true {
-            do {
-                guard let user = try service.userService(login: loginTextField.text ?? "")else {return print("opps")}
-                viewModel.updateState(viewInput: .loginButtonDidTap, user: user)
-            }
-            catch {
-                switch error {
-                case let badRequest as LoginError:
-                    showAlert(title: "badRequest", message: "Press OK")
-                    print(badRequest)
-                case  let noConnection as LoginError:
-                    showAlert(title: "noConnection", message: "Press OK")
-                    print(noConnection)
-                case let unknownError as LoginError:
-                    showAlert(title: "unknownError", message: "Press OK")
-                    print(unknownError)
-                default:
-                    print(error.localizedDescription)
-                }
-            }
-            
-        }else   {
-            showAlert(title: "Ошибка", message:  "Введен не верный логин или пароль")
-
-        }
     }
     
 

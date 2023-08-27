@@ -2,7 +2,7 @@
 //  AppCoordinator.swift
 //  Navigation
 //
-//  Created by JaY on 24.04.2023.
+//
 //
 
 import UIKit

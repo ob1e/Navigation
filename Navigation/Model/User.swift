@@ -34,7 +34,7 @@ protocol UserService {
     // текущий пользователь
 class CurrentUserService: UserService {
     
-    var user = User(login: "sainchuk", fullName: "Саинчук Николай", avatar: UIImage(named: "avatar")!, status: "Listens to music")
+    var user = User(login: "sainchuk@ya.ru", fullName: "Саинчук Николай", avatar: UIImage(named: "avatar")!, status: "Listens to music")
 
     func userService(login: String)throws -> User? {
         if login == user.login {

@@ -7,6 +7,9 @@
 
 import UIKit
 
+var checkerService: CheckerService?
+
+
 // Singleton (Одиночка)
 final class Checker {
     
@@ -17,8 +20,8 @@ final class Checker {
     private let login = "test"
     private let password = "123"
     #else
-    private let login = "sainchuk"
-    private let password = "123"
+    private let login = "sainchuk@ya.ru"
+    private let password = "123456"
     #endif
     func check (login: String, password: String)->Bool {
         if login == self.login && password == self.password {
@@ -36,13 +39,18 @@ protocol LoginViewControllerDelegate {
 }
 
 struct LoginInspector: LoginViewControllerDelegate {
+    
     func check(login: String, password: String) -> Bool {
+
         if Checker.shared.check(login: login, password: password) == true {
+
             return true
         }else {
             return false
         }
     }
+    
+    
 }
 
 // Factory (Фабрика для производства обьектов проверки пароля)

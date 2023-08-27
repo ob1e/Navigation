@@ -8,12 +8,7 @@
 import UIKit
 
 final class AppFactory {
-    private let userService: UserService
-    
-    init(userService: UserService) {
-        self.userService = userService
-    }
-    
+
     func makeModule(ofType moduleType: Module.Moduletype) -> Module {
         switch moduleType {
         case .feed:
@@ -21,12 +16,12 @@ final class AppFactory {
             let view = UINavigationController(rootViewController: FeedViewController(viewModel: viewModel))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         case .profile:
-            let viewModel = ProfileViewModel(userService: userService)
-            let view = UINavigationController(rootViewController: LogInViewController(viewModel: viewModel, loginDelegate: LoginInspector()))
+            let viewModel = ProfileViewModel()
+            let view = UINavigationController(rootViewController: LogInViewController(viewModel: viewModel, loginDelegate: LoginInspector(), cheker: CheckerService(viewModel: viewModel)))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
-    
+
 }
 
 
