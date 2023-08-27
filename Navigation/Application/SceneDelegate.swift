@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -23,9 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let factory = AppFactory(userService: CurrentUserService())
+        let factory = AppFactory()
         let appCoordinator = AppCoordinator(factory: factory)
-        
+//        let appCoordinator = AppCoordinator(factory: AppFactory)
         self.appCoordinator = appCoordinator
         
             /* Запуск сетевого запроса
@@ -47,7 +49,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func sceneDidDisconnect(_ scene: UIScene) {
-       
+        
+        try? Auth.auth().signOut()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

@@ -2,14 +2,14 @@
 //  ProfileViewModel.swift
 //  Navigation
 //
-//  Created by JaY on 29.04.2023.
+//
 //
 
 import Foundation
 
 protocol ProfileViewModelProtocol: ViewModelProtocol {
     var onStateDidChange: ((ProfileViewModel.State)-> Void)? { get set }
-    func updateState(viewInput: ProfileViewModel.ViewInput, user: User)
+    func updateState(viewInput: ProfileViewModel.ViewInput)
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
@@ -33,16 +33,12 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
-    private let userService: UserService
-    init(userService: UserService) {
-        self.userService = userService
-    }
     
-    func updateState(viewInput: ViewInput, user: User) {
+    func updateState(viewInput: ViewInput) {
         switch viewInput {
         case .loginButtonDidTap:
             state = .loading
-            coordinator?.pushProfileViewController(user: user)
+            coordinator?.pushProfileViewController()
             
         }
     }
